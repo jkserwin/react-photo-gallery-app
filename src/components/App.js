@@ -54,10 +54,10 @@ class App extends Component {
 
           <Routes>
             <Route exact path="/" render={ () => <Navigate to={"/ducks"}/>}/>
-            <Route path="/ducks" render={ () => <PhotoContainer query="ducks" performSearch={this.performSearch} data={this.state.photos} loading={this.state.loading}/>}/>
-            <Route path="/spaghetti" render={ () => <PhotoContainer query="spaghetti" performSearch={this.performSearch} data={this.state.photos} loading={this.state.loading}/>}/>
-            <Route path="/ron" render={ () => <PhotoContainer query="ron" performSearch={this.performSearch} data={this.state.photos} loading={this.state.loading}/>}/>
-            <Route element={ErrorPage}/>
+            <Route path="/ducks" render={ () => <PhotoContainer query="ducks" performSearch={this.performSearch} data={this.state.photos} loading={this.state.loading} /> }/>
+            <Route path="/spaghetti" render={ () => <PhotoContainer query="spaghetti" performSearch={this.performSearch} data={this.state.photos} loading={this.state.loading} /> }/>
+            <Route path="/australia" render={ () => <PhotoContainer query="australia" performSearch={this.performSearch} data={this.state.photos} loading={this.state.loading} /> }/>
+            <Route element={<ErrorPage/>}/>
           </Routes>
 
 
