@@ -32,7 +32,7 @@ class App extends Component {
     this.performSearch();
   }
 
-  performSearch = (query = 'ducks') => {
+  performSearch = (query) => {
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&media=photos&per_page=24&format=json&nojsoncallback=1`)
       .then(response => {
         this.setState({
@@ -53,10 +53,10 @@ class App extends Component {
           <Nav />
 
           <Routes>
-            <Route exact path="/" render={ () => <Navigate to={"/ducks"}/>}/>
-            <Route path="/ducks" render={ () => <PhotoContainer query="ducks" performSearch={this.performSearch} data={this.state.photos} loading={this.state.loading} /> }/>
-            <Route path="/spaghetti" render={ () => <PhotoContainer query="spaghetti" performSearch={this.performSearch} data={this.state.photos} loading={this.state.loading} /> }/>
-            <Route path="/australia" render={ () => <PhotoContainer query="australia" performSearch={this.performSearch} data={this.state.photos} loading={this.state.loading} /> }/>
+            <Route exact path="/" element={ <Navigate to={"/ducks"}/> }/>
+            <Route path="/ducks" element={ <PhotoContainer query='ducks' performSearch={this.performSearch} data={this.state.photos} loading={this.state.loading} title='Photo Results for: Ducks'/> }/>
+            <Route path="/spaghetti" element={ <PhotoContainer query='spaghetti' performSearch={this.performSearch} data={this.state.photos} loading={this.state.loading} /> }/>
+            <Route path="/australia" element={ <PhotoContainer query='australia' performSearch={this.performSearch} data={this.state.photos} loading={this.state.loading} /> }/>
             <Route element={<ErrorPage/>}/>
           </Routes>
 
