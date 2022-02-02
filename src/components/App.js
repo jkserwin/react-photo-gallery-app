@@ -23,6 +23,9 @@ class App extends Component {
     super();
     this.state = {
       photos: [],
+      ducks: [],
+      spaghetti: [],
+      australia: [],
       loading: true,
       query: ''
     };
@@ -32,11 +35,11 @@ class App extends Component {
     this.performSearch();
   }
 
-  performSearch = (query) => {
+  performSearch = (query, list) => {
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&media=photos&per_page=24&format=json&nojsoncallback=1`)
       .then(response => {
         this.setState({
-          photos: response.data.photos.photo,
+          list: response.data.photos.photo,
           loading: false
         })
       })
@@ -44,24 +47,28 @@ class App extends Component {
         console.log('Error fetching and parsing data', error)
       });
   }
+  
 
   render() {
+
+    this.performSearch('ducks', this.state.ducks);
+    this.performSearch('spaghetti', this.state.spaghetti);
+    this.performSearch('australia', this.state.australia);
+
     return (
       <BrowserRouter>
         <div className="container">
-          <SearchForm onSearch={this.performSearch}/>
+          <SearchForm onSearch={this.performSearch(this.state.query, this.state.photos)}/>
           <Nav />
 
           <Routes>
             <Route exact path="/" element={ <Navigate to={"/ducks"}/> }/>
-            <Route path="/ducks" element={ <PhotoContainer query='ducks' performSearch={this.performSearch} data={this.state.photos} loading={this.state.loading} title='Photo Results for: Ducks'/> }/>
-            <Route path="/spaghetti" element={ <PhotoContainer query='spaghetti' performSearch={this.performSearch} data={this.state.photos} loading={this.state.loading} /> }/>
-            <Route path="/australia" element={ <PhotoContainer query='australia' performSearch={this.performSearch} data={this.state.photos} loading={this.state.loading} /> }/>
+            <Route path="/ducks" element={ <PhotoContainer data={this.state.ducks} loading={this.state.loading} title='Photo Results for: Ducks'/> }/>
+            <Route path="/spaghetti" element={ <PhotoContainer data={this.state.spaghetti} loading={this.state.loading} /> }/>
+            <Route path="/australia" element={ <PhotoContainer data={this.state.australia} loading={this.state.loading} /> }/>
             <Route element={<ErrorPage/>}/>
           </Routes>
 
-
-          
         </div>
       </BrowserRouter>
     );
