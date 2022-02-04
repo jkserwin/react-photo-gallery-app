@@ -33,6 +33,9 @@ class App extends Component {
 
   componentDidMount() {
     this.performSearch();
+    this.performSearch('ducks');
+    this.performSearch('spaghetti');
+    this.performSearch('australia');
   }
 
   performSearch = (query) => {
@@ -71,7 +74,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="container">
-          <SearchForm onSearch={this.performSearch(this.state.query)}/>
+          <SearchForm onSearch={this.performSearch}/>
           <Nav />
 
           <Routes>
