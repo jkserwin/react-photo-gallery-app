@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 
+import { useNavigate } from 'react-router-dom';
+
+function withNavigation(Component) {
+    return props => <Component {...props} navigate={useNavigate()} />;
+}
+
 class SearchForm extends Component {
     
     state = {
@@ -13,6 +19,7 @@ class SearchForm extends Component {
     handleSubmit = e => {
         e.preventDefault();
         this.props.onSearch(this.state.searchText);
+        this.props.navigate('/');
         e.currentTarget.reset();
     }
 
@@ -36,4 +43,4 @@ class SearchForm extends Component {
     }
 }
 
-export default SearchForm;
+export default withNavigation(SearchForm);
