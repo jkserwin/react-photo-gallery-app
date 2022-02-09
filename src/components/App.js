@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {
   BrowserRouter,
   Route,
-  Navigate,
   Routes
 } from 'react-router-dom';
 import axios from 'axios';
